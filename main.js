@@ -37,25 +37,25 @@ window.onload = function () {
     game.score = 0;
     game.rootScene.addEventListener("enterframe", function () {
       if (game.frame % 10 == 0) {
-        addBanana();
-        if ((game.score >= 5) & (game.frame % 5 == 0)) {
+        if (game.score >= 0 && game.frame % 5 == 0) {
+          addBanana();
+        }
+        if (game.score >= 3 && game.frame % 5 == 0) {
           addBomba();
         }
-        if ((game.score >= 15) & (game.frame % 15 == 0)) {
+        if (game.score >= 15 && game.frame % 15 == 0) {
           addDinamite();
         }
-        if ((game.score > 20) & (game.frame % 12 == 0)) {
+        if (game.score > 20 && game.frame % 12 == 0) {
           addMorte();
         }
-        if ((game.score > 30) & (game.frame % 15 == 0)) {
+        if (game.score > 30 && game.frame % 18 == 0) {
           addEstrela();
         }
       }
-
       if (game.score >= 100) {
         victory();
-      }
-      if (game.score < 0) {
+      } else if (game.score < 0) {
         game.end(game.score, game.score + " bananas capturadas!");
       }
     });
@@ -138,7 +138,7 @@ function addBomba() {
       game.rootScene.removeChild(this);
       game.score--; // Reduz a pontuação quando a bomba toca o personagem
     } else {
-      this.y += 3;
+      this.y += 4;
     }
   });
   game.rootScene.addChild(bomba);
